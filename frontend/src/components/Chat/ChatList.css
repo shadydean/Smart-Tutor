@@ -1,0 +1,75 @@
+.chat-list {
+  width: 300px;
+  background-color: #fff;
+  border-right: 1px solid #dee2e6;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.chat-list h2 {
+  padding: 1rem;
+  margin: 0;
+  border-bottom: 1px solid #dee2e6;
+  background-color: #f8f9fa;
+}
+
+.conversations {
+  display: flex;
+  flex-direction: column;
+}
+
+.conversation-item {
+  padding: 1rem;
+  border-bottom: 1px solid #dee2e6;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.conversation-item:hover {
+  background-color: #f8f9fa;
+}
+
+.conversation-info {
+  flex: 1;
+  overflow: hidden;
+}
+
+.conversation-info h4 {
+  margin: 0;
+  color: #333;
+  font-size: 1rem;
+}
+
+.conversation-info p {
+  margin: 0.25rem 0 0;
+  color: #6c757d;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.conversation-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+}
+
+.time {
+  font-size: 0.75rem;
+  color: #6c757d;
+}
+
+.unread-badge {
+  background-color: #007bff;
+  color: white;
+  border-radius: 50%;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  min-width: 1.5rem;
+  text-align: center;
+} 
