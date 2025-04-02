@@ -20,16 +20,30 @@ const conversationRoutes = require('./routes/conversations');
 
 const app = express();
 
-// Middleware
+// CORS configuration
+const allowedOrigins = process.env.CORS_ORIGINS 
+  ? process.env.CORS_ORIGINS.split(',')
+  : ['http://localhost:3000', 'https://smart-tutor-5my6x73g6-deans-projects-ef21e784.vercel.app'];
+
+console.log('Allowed Origins:', allowedOrigins);
+
 app.use(cors({
-  origin: [
-    'https://smarttutor-frontend.vercel.app',
-    'http://localhost:3000'
-  ],
-  credentials: true,
+  origin: function(origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
 }));
+
+// Body parsing middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

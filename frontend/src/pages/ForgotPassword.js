@@ -15,7 +15,7 @@ import {
   Fade,
 } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
-import axios from 'axios';
+import api from '../utils/axios';
 import { styled } from '@mui/material/styles';
 
 const steps = ['Enter Email', 'Check Email', 'Reset Password'];
@@ -92,7 +92,7 @@ function ForgotPassword() {
     try {
       setError('');
       setLoading(true);
-      await axios.post('http://localhost:5000/api/auth/forgot-password', { email });
+      await api.post('/auth/forgot-password', { email });
       setSuccess('Password reset instructions have been sent to your email');
       setActiveStep(1);
     } catch (err) {
@@ -111,7 +111,7 @@ function ForgotPassword() {
     try {
       setError('');
       setLoading(true);
-      await axios.post(`http://localhost:5000/api/auth/reset-password/${resetToken}`, {
+      await api.post(`/auth/reset-password/${resetToken}`, {
         password: newPassword,
       });
       setSuccess('Password has been reset successfully');

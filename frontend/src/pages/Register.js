@@ -149,15 +149,23 @@ const Register = () => {
     try {
       setError('');
       setLoading(true);
+      console.log('Submitting registration data:', {
+        ...formData,
+        password: '[REDACTED]'
+      });
+      
       await register({
         name: formData.name,
         email: formData.email,
         password: formData.password,
         role: formData.role,
       });
+      
       navigate('/');
     } catch (err) {
-      setError(err.response?.data?.message || 'Failed to create account');
+      console.error('Registration error:', err);
+      const errorMessage = err.response?.data?.message || err.message || 'Failed to create account';
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
